@@ -22,9 +22,10 @@
     
     <link href="/static/styles.css" rel="stylesheet">
     
+    <script src="/static/papaparse.js"></script>
     
     <!-- Chart Includes -->
-    <script src="/static/statsMaker.js"></script>
+    <script src="/static/plot.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.min.js"></script>
     
     <!-- jQuery -->
@@ -700,53 +701,50 @@
     <script>
     
     var myRequest = new Request('/static/output.json');
-
-        fetch(myRequest)
-          .then(function(response) { return response.json(); })
-          .then(function(json) {
-              document.getElementById('user_id1').textContent = json.user_name['0'];
-                document.getElementById('profile_pic1').src = json.profile_pic['0'];
-                document.getElementById('text1').textContent = json.text['0'];
-                document.getElementById('created_at1').textContent=json.created_at['0'];
-                document.getElementById('retweet1').textContent=json.RT['0'];
-                document.getElementById('favourite1').textContent=json.favourites['0'];
-
-                document.getElementById('user_id2').textContent = json.user_name['1'];
-                document.getElementById('profile_pic2').src = json.profile_pic['1'];
-                document.getElementById('text2').textContent = json.text['1'];
-                document.getElementById('created_at2').textContent=json.created_at['1'];
-                document.getElementById('retweet2').textContent=json.RT['1'];
-                document.getElementById('favourite2').textContent=json.favourites['1'];
-
-                document.getElementById('user_id3').textContent = json.user_name['2'];
-                document.getElementById('profile_pic3').src = json.profile_pic['2'];
-                document.getElementById('text3').textContent = json.text['2'];
-                document.getElementById('created_at3').textContent=json.created_at['2'];
-                document.getElementById('retweet3').textContent=json.RT['2'];
-                document.getElementById('favourite3').textContent=json.favourites['2'];
-
-                document.getElementById('user_id4').textContent = json.user_name['3'];
-                document.getElementById('profile_pic4').src = json.profile_pic['3'];
-                document.getElementById('text4').textContent = json.text['3'];
-                document.getElementById('created_at4').textContent=json.created_at['3'];
-                document.getElementById('retweet4').textContent=json.RT['3'];
-                document.getElementById('favourite4').textContent=json.favourites['3'];
-
-                document.getElementById('user_id5').textContent = json.user_name['4'];
-                document.getElementById('profile_pic5').src = json.profile_pic['4'];
-                document.getElementById('text5').textContent = json.text['4'];
-                document.getElementById('created_at5').textContent=json.created_at['4'];
-                document.getElementById('retweet5').textContent=json.RT['4'];
-                document.getElementById('favourite5').textContent=json.favourites['4'];
-          });
-
         
-        
-       
-    
-            
+    fetch(myRequest)
+      .then(function(response) { return response.json(); })
+      .then(function(json) {
+            document.getElementById('user_id1').textContent = json.user_name['0'];
+            document.getElementById('profile_pic1').src = json.profile_pic['0'];
+            document.getElementById('text1').textContent = json.text['0'];
+            document.getElementById('created_at1').textContent=json.created_at['0'];
+            document.getElementById('retweet1').textContent=json.RT['0'];
+            document.getElementById('favourite1').textContent=json.favourites['0'];
+
+            document.getElementById('user_id2').textContent = json.user_name['1'];
+            document.getElementById('profile_pic2').src = json.profile_pic['1'];
+            document.getElementById('text2').textContent = json.text['1'];
+            document.getElementById('created_at2').textContent=json.created_at['1'];
+            document.getElementById('retweet2').textContent=json.RT['1'];
+            document.getElementById('favourite2').textContent=json.favourites['1'];
+
+            document.getElementById('user_id3').textContent = json.user_name['2'];
+            document.getElementById('profile_pic3').src = json.profile_pic['2'];
+            document.getElementById('text3').textContent = json.text['2'];
+            document.getElementById('created_at3').textContent=json.created_at['2'];
+            document.getElementById('retweet3').textContent=json.RT['2'];
+            document.getElementById('favourite3').textContent=json.favourites['2'];
+
+            document.getElementById('user_id4').textContent = json.user_name['3'];
+            document.getElementById('profile_pic4').src = json.profile_pic['3'];
+            document.getElementById('text4').textContent = json.text['3'];
+            document.getElementById('created_at4').textContent=json.created_at['3'];
+            document.getElementById('retweet4').textContent=json.RT['3'];
+            document.getElementById('favourite4').textContent=json.favourites['3'];
+
+            document.getElementById('user_id5').textContent = json.user_name['4'];
+            document.getElementById('profile_pic5').src = json.profile_pic['4'];
+            document.getElementById('text5').textContent = json.text['4'];
+            document.getElementById('created_at5').textContent=json.created_at['4'];
+            document.getElementById('retweet5').textContent=json.RT['4'];
+            document.getElementById('favourite5').textContent=json.favourites['4'];
+      });
 
     </script>
+    
+    
+    
     
     <!--<script type="text/javascript">
         timeout = setTimeout("location.reload(true);",1000*60);
