@@ -2,6 +2,7 @@ from flask import Flask,render_template,request,Response,json
 import sys
 import numpy as np
 import pandas as pd
+import __future__
 app = Flask(__name__)
 
 data_list = []
@@ -25,7 +26,7 @@ def hello():
 @app.route('/test' , methods=['GET'])
 def hello2():
     
-    print(request.data, file=sys.stdout)
+    #print(request.data, file=sys.stdout)
     data_list.append(parse_temp(request.data))
     
     content = b"GET: Hello, Mbed!"
@@ -49,4 +50,4 @@ def wfile_csv():
 
 if __name__ == '__main__':
     #app = create_app()
-    app.run(host="10.248.153.33")
+    app.run(host="10.25.1.170")
