@@ -178,7 +178,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge" id="socialCorrIndex">...</div>
-                                    <div>Social Correlation Index</div>
+                                    <div>Total Energy Cost</div>
                                 </div>
                             </div>
                         </div>
@@ -201,7 +201,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge" id="sensitivityIndex">...</div>
-                                    <div>Sensitivity Index</div>
+                                    <div>Total Power Consumption</div>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +225,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge" id="trendingTweetsCounter">...</div>
-                                    <div>Trending Tweets</div>
+                                    <div>Average Air Quality</div>
                                 </div>
                             </div>
                         </div>
@@ -247,7 +247,7 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge" id="estimatedReach">...</div>
-                                    <div>Estimated Reach</div>
+                                    <div>Average Occupancy Rate</div>
                                 </div>
                             </div>
                         </div>
@@ -263,22 +263,22 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-lg-8">
+                <div class="col-lg-9">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bar-chart-o fa-fw"></i> Social Correlation Chart
+                            <i class="fa fa-bar-chart-o fa-fw" id='chart-title'></i>Compiled Temperature Chart
                             <div class="pull-right">
                                 <div class="btn-group">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                        Select Currency
+                                        Select Time Scale
                                         <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu pull-right" role="menu">
-                                        <li><a href="#">Bitcoin</a>
+                                        <li><a href="#">Day</a>
                                         </li>
-                                        <li><a href="#">Litcoin</a>
+                                        <li><a href="#" onclick="plotLandlordTempWeekly(); return false;">Week</a>
                                         </li>
-                                        <li><a href="#">Ethereum</a>
+                                        <li><a href="#">Month</a>
                                         </li>
                                         <li class="divider"></li>
                                         <li><a href="#">Remove all filters</a>
@@ -297,15 +297,15 @@
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-8 -->
-                <div class="col-lg-4">
+                <div class="col-lg-3">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> Chart Filters
+                            <i class="fa fa-bell fa-fw"></i> User Metrics
                             <div class="pull-right">
                                 
                                 <div class="btn-group">
                                 <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                Select Filters
+                                Select Metrics
                                 <span class="caret"></span>
                                 </button>
                                 
@@ -325,21 +325,6 @@
                                 });
                                 </script>    
                                 
-                                <!--
-                                <ul class="nav nav-tabs">
-                                    <li class="dropdown">
-                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Select Filters
-                                        <span class="caret"></span></a>
-                                        <ul class="dropdown-menu pull-right" role="menu" >
-                                            <li><a href="#weights-menu" data-toggle="tab">Indexes / Weights</a>
-                                            </li>
-                                            <li><a href="#filter-menu" data-toggle="tab">Filters</a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    
-                                </ul>
--->
                                 
                                 <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -348,64 +333,31 @@
                             <div class="list-group" >
                                 <div class="list-group-item">
                                     <div class="row">
-                                        <div class="col-xs-4" style="padding-right: 0 !important;">
-                                            <div class="form-group">
-                                                <input type="number" class="form-control" id="tweet_coeff1" onchange=reviseCoefficient() step="0.1">
-                                            </div>
+                                        <div class="col-xs-6" style="padding-right: 0 !important;">
+                                            Maximum: 
                                         </div>
-                                        <div class="col-xs-4 text-center" style="padding-left: 0 !important;padding-right: 0 !important;">
-                                            <div class="small text-muted"> x Tweets ^</div>
-                                        </div>
-                                        <div class="col-xs-4" style="padding-left: 0 !important;">
-                                            <div class="form-group">
-                                                <input type="number" class="form-control" id="tweet_coeff2" onchange=reviseCoefficient() step="0.1" >
-                                            </div>
+                                        <div class="col-xs-6" style="padding-left: 0 !important;">
+                                            <div id='max'> ... </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="list-group-item">
                                     <div class="row">
-                                        <div class="col-xs-4" style="padding-right: 0 !important;">
-                                            <div class="form-group">
-                                                <input type="number" class="form-control" id="fav_coeff1" onchange=reviseCoefficient() step="0.1" >
-                                            </div>
+                                        <div class="col-xs-6" style="padding-right: 0 !important;">
+                                            Minimum: 
                                         </div>
-                                        <div class="col-xs-4 text-center" style="padding-left: 0 !important;padding-right: 0 !important;">
-                                            <div class="small"> x Favourites ^</div>
-                                        </div>
-                                        <div class="col-xs-4">
-                                            <div class="form-group" style="padding-left: 0 !important;">
-                                                <input type="number" class="form-control" id="fav_coeff2" onchange=reviseCoefficient() step="0.1" >
-                                            </div>
+                                        <div class="col-xs-6" style="padding-left: 0 !important;">
+                                            <div id='min'> ... </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="list-group-item">
                                     <div class="row">
-                                        <div class="col-xs-4" style="padding-right: 0 !important;">
-                                            <div class="form-group">
-                                                <input type="number" class="form-control" id="RT_coeff1" onchange=reviseCoefficient() step="0.1" >
-                                            </div>
+                                        <div class="col-xs-6" style="padding-right: 0 !important;">
+                                            Average: 
                                         </div>
-                                        <div class="col-xs-4 text-center" style="padding-left: 0 !important;padding-right: 0 !important;">
-                                            <div class="small"> x Retweets ^</div>
-                                        </div>
-                                        <div class="col-xs-4" style="padding-left: 0 !important;">
-                                            <div class="form-group">
-                                                <input type="number" class="form-control" id="RT_coeff2" onchange=reviseCoefficient() step="0.1" >
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="list-group-item">
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            Overall Offset:
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <div class="form-group">
-                                                <input type="number" class="form-control" id="offset" onchange=reviseCoefficient() step="500" >
-                                            </div>
+                                        <div class="col-xs-6" style="padding-left: 0 !important;">
+                                            <div id='avg'> ... </div>
                                         </div>
                                     </div>
                                 </div>
@@ -413,7 +365,7 @@
                                 
                                 <a href="#" class="list-group-item">
                                     <i class="fa fa-tasks fa-fw"></i> Last Update
-                                    <span class="pull-right text-muted small"><em>43 minutes ago</em>
+                                    <span class="pull-right text-muted small"><em>1 minute ago</em>
                                     </span>
                                 </a>
                                 
