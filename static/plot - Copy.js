@@ -49,7 +49,6 @@ function generateData(result){
     var arrayLength = array1.length;
     var temp = [];
     for (var i = 1; i < arrayLength; i++){
-	time.push(array1[i][0]);
         output1.push(array1[i][1]);
 	output2.push(array1[i][2]);
 	output3.push(array1[i][5]);
@@ -64,7 +63,7 @@ function generateData(result){
 
 
 //console.log(output1);
-    var time = [];
+
     var output1 = [];
     var output1_plot = {};   
     var output2 = [];  
@@ -142,7 +141,7 @@ function plotGraph(filename){
                   myChart = new Chart(ctx, {
                     type: 'line',
                     data: {
-                      labels:time,
+                      labels:Array.apply(null, Array(timeRange)).map(function (_, i) {return i;}),
                       datasets: [
                         output1_plot,output2_plot,output3_plot,output4_plot,output5_plot,output6_plot,output7_plot],
                     }
@@ -158,7 +157,7 @@ function plotGraph(filename){
 
 window.onload = function(){
     
-    var file = '/static/kevin.csv';
+    var file = '/static/michael.csv';
     
     plotGraph(file);
   
