@@ -61,12 +61,30 @@ function twoDec(num) {
 
 function updateIndicator(){
     var output1_temp = [];
+    var output2_temp = [];
+    var output3_temp = [];
+    var output4_temp = [];
+    var output5_temp = [];
+    var output6_temp = [];
+    var output7_temp = [];
   for(var t = 0; t <  output1.length; t = t + 1){
-    output1_temp.push( output1_coeff * output1[t]);
+            output1_temp.push( output1_coeff * output1[t]);
+            output2_temp.push( output2_coeff * output2[t]);
+            output3_temp.push( output3_coeff * output3[t]);
+            output4_temp.push( output4_coeff * output4[t]);
+            output5_temp.push( output5_coeff * output5[t]);
+            output6_temp.push( output6_coeff * output6[t]);
+            output7_temp.push( output7_coeff * output7[t]);
   }  
     
     //output1 = output1_temp;
   myChart.data.datasets[0].data = output1_temp;
+  myChart.data.datasets[1].data = output2_temp;
+  myChart.data.datasets[2].data = output3_temp;
+  myChart.data.datasets[3].data = output4_temp;
+  myChart.data.datasets[4].data = output5_temp;
+  myChart.data.datasets[5].data = output6_temp;
+  myChart.data.datasets[6].data = output7_temp;
 
   myChart.update();
 
@@ -207,6 +225,16 @@ window.onload = function(){
     var file = '/static/kevin.csv';
     
     plotRawGraph(file);
+    
+    document.getElementById('output1_coeff').value = 1;
+      document.getElementById('output2_coeff').value = 1;
+      document.getElementById('output3_coeff').value = 1;   
+      document.getElementById('output4_coeff').value = 1;
+      document.getElementById('output5_coeff').value = 1;
+      document.getElementById('output6_coeff').value = 1;
+      document.getElementById('output7_coeff').value = 1;
+    
+    
     
     updateIndicator();
 
