@@ -87,6 +87,7 @@ function generateData(result){
     var arrayLength = array1.length;
     var temp = [];
     for (var i = 1; i < arrayLength; i++){
+	time.push(array1[i][0]);
     output1.push(array1[i][1]);
 	output2.push(array1[i][2]);
 	output3.push(array1[i][5]);
@@ -102,6 +103,21 @@ function generateData(result){
 
 //console.log(output1);
 
+    var time = [];
+    var output1 = [];
+    var output1_plot = {};   
+    var output2 = [];  
+    var output2_plot = {};
+    var output3 = [];  
+    var output3_plot = {};
+    var output4 = [];  
+    var output4_plot = {};
+    var output5 = [];  
+    var output5_plot = {};
+    var output6 = [];  
+    var output6_plot = {};
+    var output7 = [];  
+    var output7_plot = {};
 
 
 
@@ -166,7 +182,7 @@ function plotRawGraph(filename){
                   myChart = new Chart(ctx, {
                     type: 'line',
                     data: {
-                      labels:Array.apply(null, Array(timeRange)).map(function (_, i) {return i;}),
+                      labels:time,
                       datasets: [
                         output1_plot,output2_plot,output3_plot,output4_plot,output5_plot,output6_plot,output7_plot],
                     }
@@ -188,7 +204,7 @@ function plotLandlordGraph(filename){
 
 window.onload = function(){
     
-    var file = '/static/michael.csv';
+    var file = '/static/kevin.csv';
     
     plotRawGraph(file);
     
