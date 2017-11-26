@@ -5,6 +5,26 @@ var times = [];
 
 var timeRange = 50;
 
+var output1_coeff = 1;
+var retweetCoefs = [1,1];
+var favCoefs = [1,1];
+
+    var output1 = [];
+    var output1_plot = {};   
+    var output2 = [];  
+    var output2_plot = {};
+    var output3 = [];  
+    var output3_plot = {};
+    var output4 = [];  
+    var output4_plot = {};
+    var output5 = [];  
+    var output5_plot = {};
+    var output6 = [];  
+    var output6_plot = {};
+    var output7 = [];  
+    var output7_plot = {};
+
+
 
 /**
   Generate array of time labels
@@ -39,7 +59,25 @@ function twoDec(num) {
 }
 
 
+function updateIndicator(){
+    var output1_temp = [];
+  for(var t = 0; t <  output1.length; t = t + 1){
+    output1_temp.push( output1_coeff * output1[t]);
+  }  
+    
+    //output1 = output1_temp;
+  myChart.data.datasets[0].data = output1_temp;
 
+  myChart.update();
+
+  document.getElementById('output1_coeff').value = output1_coeff;
+  document.getElementById('output2_coeff').value = output2_coeff;
+  document.getElementById('output3_coeff').value = output3_coeff;   
+  document.getElementById('output4_coeff').value = output4_coeff;
+  document.getElementById('output5_coeff').value = output5_coeff;
+  document.getElementById('output6_coeff').value = output6_coeff;
+  document.getElementById('output7_coeff').value = output7_coeff;
+}
 
     
     
@@ -49,7 +87,7 @@ function generateData(result){
     var arrayLength = array1.length;
     var temp = [];
     for (var i = 1; i < arrayLength; i++){
-        output1.push(array1[i][1]);
+    output1.push(array1[i][1]);
 	output2.push(array1[i][2]);
 	output3.push(array1[i][5]);
 	output4.push(array1[i][6]);
@@ -64,23 +102,10 @@ function generateData(result){
 
 //console.log(output1);
 
-    var output1 = [];
-    var output1_plot = {};   
-    var output2 = [];  
-    var output2_plot = {};
-    var output3 = [];  
-    var output3_plot = {};
-    var output4 = [];  
-    var output4_plot = {};
-    var output5 = [];  
-    var output5_plot = {};
-    var output6 = [];  
-    var output6_plot = {};
-    var output7 = [];  
-    var output7_plot = {};
 
 
-function plotGraph(filename){
+
+function plotRawGraph(filename){
     
     ctx = document.getElementById('myChart').getContext('2d');
     
@@ -91,7 +116,7 @@ function plotGraph(filename){
       .then(function(csv) {   
         Papa.parse(csv, {
             complete: function(results) {
-                console.log(results);
+               //console.log(results);
                 generateData(results);
                 output1_plot = {
                   data: output1,
@@ -146,7 +171,7 @@ function plotGraph(filename){
                         output1_plot,output2_plot,output3_plot,output4_plot,output5_plot,output6_plot,output7_plot],
                     }
                   });
-                
+                                
             }
         });
     });
@@ -154,19 +179,115 @@ function plotGraph(filename){
 };
 
 
+function plotLandlordGraph(filename){
+    
+    
+    
+    
+}
 
 window.onload = function(){
     
     var file = '/static/michael.csv';
     
-    plotGraph(file);
+    plotRawGraph(file);
+    
+    updateIndicator();
+
+    
   
 };
 
 
-function plotLandlordTemp(){
+function plotLandlordTempWeekly(){
+    console.log(output1);
+
+    output1.length=0;
+    output2.length=0;
+    output3.length=0;
+    output4.length=0;
+    output5.length=0;
+    output6.length=0;
+    output7.length=0;
+    myChart.destroy();
     
-    var file = '/static/out.csv';
-    plotGraph(file);
+    var filename = '/static/landLord.csv';
+    ctx = document.getElementById('myChart').getContext('2d');
+    
+    var myRequest = new Request(filename);
+
+    fetch(myRequest)
+      .then(function(response) { return response.text(); })
+      .then(function(csv) {   
+        Papa.parse(csv, {
+            complete: function(results) {
+                //console.log(results);
+                generateData(results);
+                var output1_plot = {
+                  data: output1,
+                  label: "Temperature",
+                  borderColor: "#f0ad4e",
+                  fill: false,
+                }
+		var output2_plot = {
+                  data: output2,
+                  label: "Humidity",
+                  borderColor: "#0052C2",
+                  fill: false,
+                }
+		var output3_plot = {
+                  data: output3,
+                  label: "Visible",
+                  borderColor: "#003b8f",
+                  fill: false,
+                }
+		var output4_plot = {
+                  data: output4,
+                  label: "Infra-red",
+                  borderColor: "#4794ff",
+                  fill: false,
+                }
+		var output5_plot = {
+                  data: output5,
+                  label: "Acceleration_x",
+                  borderColor: "#9500cb",
+                  fill: false,
+                }
+		var output6_plot = {
+                  data: output6,
+                  label: "Acceleration_y",
+                  borderColor: "#5cb85c",
+                  fill: false,
+                }
+		var output7_plot = {
+                  data: output7,
+                  label: "Acceleration_z",
+                  borderColor: "#e27fef",
+                  fill: false,
+                }
+                
+                var x=0;
+                while(output1[x]!=""){
+                    x++;
+                }
+        
+                var time_len=x;
+                console.log(output1);
+                console.log(x);
+                  myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                      labels:Array.apply(null, Array(time_len)).map(function (_, i) {return i;}),
+                      datasets: [
+                        output1_plot,output2_plot,output3_plot,output4_plot,output5_plot,output6_plot,output7_plot],
+                    }
+                  });
+                                
+            }
+        });
+    });
     
 }
+
+
+

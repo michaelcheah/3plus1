@@ -29,6 +29,12 @@ def landlord():
     #wfile_csv()
     return render_template("landlord.html")
 
+@app.route("/rawData")
+def rawData():
+    #return page1
+    #wfile_csv()
+    return render_template("rawData.html")
+
 
 @app.route('/test' , methods=['GET'])
 def hello2():
