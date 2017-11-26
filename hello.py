@@ -23,6 +23,13 @@ def hello():
     wfile_csv()
     return render_template("index.html")
 
+@app.route("/landlord")
+def landlord():
+    #return page1
+    #wfile_csv()
+    return render_template("landlord.html")
+
+
 @app.route('/test' , methods=['GET'])
 def hello2():
     
@@ -50,4 +57,4 @@ def wfile_csv():
 
 if __name__ == '__main__':
     #app = create_app()
-    app.run(host="10.25.1.170")
+    app.run(host="10.248.153.33")

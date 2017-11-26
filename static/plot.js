@@ -79,12 +79,12 @@ function generateData(result){
     var output7 = [];  
     var output7_plot = {};
 
-window.onload = function(){
+
+function plotGraph(filename){
     
-  ctx = document.getElementById('myChart').getContext('2d');
+    ctx = document.getElementById('myChart').getContext('2d');
     
-    var myRequest = new Request('/static/michael.csv');
-    
+    var myRequest = new Request(filename);
 
     fetch(myRequest)
       .then(function(response) { return response.text(); })
@@ -135,11 +135,8 @@ window.onload = function(){
                   borderColor: "#e27fef",
                   fill: false,
                 }
-console.log(output1)
-console.log(output2)
                 
                 timeRange=output1.length
-    
     
                   myChart = new Chart(ctx, {
                     type: 'line',
@@ -153,6 +150,23 @@ console.log(output2)
             }
         });
     });
+    
+};
 
+
+
+window.onload = function(){
+    
+    var file = '/static/michael.csv';
+    
+    plotGraph(file);
   
 };
+
+
+function plotLandlordTemp(){
+    
+    var file = '/static/out.csv';
+    plotGraph(file);
+    
+}
