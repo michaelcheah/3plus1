@@ -38,34 +38,36 @@ function twoDec(num) {
     return with2Decimals;
 }
 
-var output1_plot = {
-  data: output1,
-  label: "BTC Price",
-  borderColor: "#f0ad4e",
-  fill: false,
-}
+
 
 
     
     
-var output1 = []    
+
 
 function generateData(result){
     var array1 = result.data;
     var arrayLength = array1.length;
+    var temp = [];
     for (var i = 0; i < arrayLength; i++){
-        output1.push(array1[i][0]);
+        temp.push(array1[i][0]);
     }
-    console.log(output1);
+    //console.log(output1);
+    return temp;
+}
 
-}        
+var output1_plot = {};
+
+var output1 = [];    
 
 
+//console.log(output1);
 
 
 
 
 window.onload = function(){
+    
   ctx = document.getElementById('myChart').getContext('2d');
     
     var myRequest = new Request('/static/out.csv');
@@ -76,21 +78,30 @@ window.onload = function(){
         Papa.parse(csv, {
             complete: function(results) {
                 console.log(results);
-                generateData(results);
+                output1 = generateData(results);
+                output1_plot = {
+                  data: output1,
+                  label: "BTC Price",
+                  borderColor: "#f0ad4e",
+                  fill: false,
+                }
+                
+                timeRange=output1.length
+    
+    
+                  myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                      labels: makeTimeLabel(timeRange,10,false),
+                      datasets: [
+                        output1_plot,
+                      ],
+                    }
+                  });
+                
             }
         });
     });
-    
-    
-  myChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: makeTimeLabel(timeRange,10,false),
-      datasets: [
-        output1_plot,
-      ],
-    }
-  });
 
   
 };
